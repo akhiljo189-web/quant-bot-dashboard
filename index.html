@@ -1,0 +1,162 @@
+<!doctype html><html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>quantbot &mdash; paper trading</title><style>
+:root{ --surface:#fcfcfb; --page:#f9f9f7; --ink:#0b0b0b; --ink-2:#52514e;
+  --muted:#898781; --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,.10);
+  --series:#2a78d6; --good:#0ca30c; --good-text:#006300; --critical:#d03b3b; }
+@media (prefers-color-scheme: dark){ :root{ --surface:#1a1a19; --page:#0d0d0d; --ink:#ffffff; --ink-2:#c3c2b7;
+  --muted:#898781; --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,.10);
+  --series:#3987e5; --good:#0ca30c; --good-text:#0ca30c; --critical:#d03b3b; } }
+:root[data-theme="dark"]{ --surface:#1a1a19; --page:#0d0d0d; --ink:#ffffff; --ink-2:#c3c2b7;
+  --muted:#898781; --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,.10);
+  --series:#3987e5; --good:#0ca30c; --good-text:#0ca30c; --critical:#d03b3b; }
+:root[data-theme="light"]{ --surface:#fcfcfb; --page:#f9f9f7; --ink:#0b0b0b; --ink-2:#52514e;
+  --muted:#898781; --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,.10);
+  --series:#2a78d6; --good:#0ca30c; --good-text:#006300; --critical:#d03b3b; }
+*{box-sizing:border-box;margin:0}
+body{background:var(--page);color:var(--ink);
+  font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;padding:24px;}
+h1{font-size:18px;font-weight:650;margin-bottom:2px}
+h2{font-size:15px;font-weight:650;margin:0 0 10px}
+.sub{color:var(--ink-2);font-size:12.5px;margin-bottom:20px}
+.section{background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:18px 20px;margin-bottom:20px}
+.tiles{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+.tile{flex:1 1 130px;min-width:130px;border:1px solid var(--border);border-radius:8px;padding:10px 12px}
+.tile .k{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.tile .v{font-size:22px;font-weight:650;margin-top:2px}
+.tile .d{font-size:12px;color:var(--ink-2);margin-top:1px}
+.pos{color:var(--good-text)} .neg{color:var(--critical)}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;
+  padding:3px 10px;border-radius:999px;border:1px solid var(--border)}
+.badge .ic{font-size:13px}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;
+  text-align:left;font-weight:600;padding:6px 10px;border-bottom:1px solid var(--grid)}
+td{padding:6px 10px;border-bottom:1px solid var(--grid);font-size:13px}
+tr:last-child td{border-bottom:none}
+td.r,th.r{text-align:right}
+.empty{color:var(--muted);font-size:13px;padding:10px 2px}
+.chartwrap{position:relative;margin:6px 0 14px}
+.tip{position:absolute;pointer-events:none;background:var(--surface);border:1px solid var(--border);
+  border-radius:6px;padding:6px 9px;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,.12);
+  display:none;white-space:nowrap;z-index:2}
+.tip b{font-variant-numeric:tabular-nums}
+.footer{color:var(--muted);font-size:11.5px;margin-top:8px}
+</style></head><body>
+<h1>quantbot &mdash; paper forward test</h1>
+<div class="sub">Alpaca paper account &middot; generated 2026-07-13 20:01 UTC &middot; regenerates after every cycle</div>
+
+  <div class="section">
+    <h2>crypto-trend</h2>
+    
+    <div class="tiles">
+      <div class="tile"><div class="k">Equity</div><div class="v">$1,000.00</div>
+        <div class="d">cash $1,000.00</div></div>
+      <div class="tile"><div class="k">P&amp;L since inception</div>
+        <div class="v pos">+0.00</div>
+        <div class="d pos">+0.00%</div></div>
+      <div class="tile"><div class="k">Drawdown</div><div class="v">0.0%</div>
+        <div class="d">high-water $1,000.00</div></div>
+      <div class="tile"><div class="k">Status</div><div class="v" style="font-size:14px;margin-top:8px"><span class="badge" style="color:var(--ink-2)"><span class="ic">&#10074;&#10074;</span>RISK-OFF &mdash; holding cash</span></div></div>
+    </div>
+    <h2 style="font-size:13px">Equity by cycle <span style="color:var(--muted);font-weight:400">&mdash; dashed line = inception $1,000</span></h2>
+    <div class="chartwrap"><div class="chart" data-pts='[{"t": "2026-07-12T21:07:44+00:00", "e": 1000.0, "o": 0, "dry": true}, {"t": "2026-07-12T21:15:06+00:00", "e": 1000.0, "o": 0, "dry": false}]' data-baseline="1000.0"></div><div class="tip"></div></div>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+      <div style="flex:1;min-width:240px"><h2 style="font-size:13px">Current target book</h2><div class='empty'>Flat &mdash; 100% cash. Every symbol is below its trend filter; the strategy is deliberately holding nothing.</div></div>
+      <div style="flex:1;min-width:240px"><h2 style="font-size:13px">Last cycle orders</h2><div class='empty'>No orders this cycle.</div></div>
+    </div>
+    <h2 style="font-size:13px;margin-top:16px">Cycle history</h2>
+    <table><tr><th>Cycle (UTC)</th><th class='r'>Equity</th><th class='r'>Orders</th><th>Mode</th><th></th></tr><tr><td>2026-07-12 21:15</td><td class='r'>$1,000.00</td><td class='r'>0</td><td>submitted</td><td></td></tr><tr><td>2026-07-12 21:07</td><td class='r'>$1,000.00</td><td class='r'>0</td><td>dry-run</td><td></td></tr></table>
+  </div>
+
+  <div class="section">
+    <h2>etf-rotation</h2>
+    
+    <div class="tiles">
+      <div class="tile"><div class="k">Equity</div><div class="v">$1,000.00</div>
+        <div class="d">cash $1,000.00</div></div>
+      <div class="tile"><div class="k">P&amp;L since inception</div>
+        <div class="v pos">+0.00</div>
+        <div class="d pos">+0.00%</div></div>
+      <div class="tile"><div class="k">Drawdown</div><div class="v">0.0%</div>
+        <div class="d">high-water $1,000.00</div></div>
+      <div class="tile"><div class="k">Status</div><div class="v" style="font-size:14px;margin-top:8px"><span class="badge" style="color:var(--good-text)"><span class="ic">&#9654;</span>ACTIVE &mdash; positions on</span></div></div>
+    </div>
+    <h2 style="font-size:13px">Equity by cycle <span style="color:var(--muted);font-weight:400">&mdash; dashed line = inception $1,000</span></h2>
+    <div class="chartwrap"><div class="chart" data-pts='[{"t": "2026-07-13T19:52:44+00:00", "e": 1000.0, "o": 4, "dry": true}]' data-baseline="1000.0"></div><div class="tip"></div></div>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+      <div style="flex:1;min-width:240px"><h2 style="font-size:13px">Current target book</h2><table><tr><th>Symbol</th><th class='r'>Target weight</th></tr><tr><td>IWM</td><td class='r'>+35.79%</td></tr><tr><td>DBC</td><td class='r'>+28.64%</td></tr><tr><td>QQQ</td><td class='r'>+19.98%</td></tr><tr><td>EEM</td><td class='r'>+15.58%</td></tr></table></div>
+      <div style="flex:1;min-width:240px"><h2 style="font-size:13px">Last cycle orders</h2><table><tr><th>Side</th><th>Symbol</th><th class='r'>Qty</th><th class='r'>Ref price</th></tr><tr><td>BUY</td><td>QQQ</td><td class='r'>0.090546</td><td class='r'>$712.56</td></tr><tr><td>BUY</td><td>IWM</td><td class='r'>0.393825</td><td class='r'>$293.41</td></tr><tr><td>BUY</td><td>EEM</td><td class='r'>0.780239</td><td class='r'>$64.47</td></tr><tr><td>BUY</td><td>DBC</td><td class='r'>3.267497</td><td class='r'>$28.30</td></tr></table></div>
+    </div>
+    <h2 style="font-size:13px;margin-top:16px">Cycle history</h2>
+    <table><tr><th>Cycle (UTC)</th><th class='r'>Equity</th><th class='r'>Orders</th><th>Mode</th><th></th></tr><tr><td>2026-07-13 19:52</td><td class='r'>$1,000.00</td><td class='r'>4</td><td>dry-run</td><td></td></tr></table>
+  </div>
+<div class="footer">Journal: data\journal/&lt;preset&gt;.jsonl &middot; dry-run = decision recorded, no orders sent &middot; this file is static; re-run scripts/build_dashboard.py to refresh</div>
+<script>
+function fmt(x){return '$'+x.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});}
+function drawChart(el, pts, baseline){
+  const W=el.clientWidth||760, H=220, m={t:14,r:12,b:26,l:58};
+  const iw=W-m.l-m.r, ih=H-m.t-m.b;
+  const xs=pts.map(p=>new Date(p.t).getTime()), ys=pts.map(p=>p.e);
+  let x0=Math.min(...xs), x1=Math.max(...xs);
+  if(x0===x1){x0-=43200000; x1+=43200000;}
+  let lo=Math.min(...ys,baseline), hi=Math.max(...ys,baseline);
+  const pad=Math.max((hi-lo)*0.15,(hi||1)*0.004); lo-=pad; hi+=pad;
+  const X=t=>m.l+(t-x0)/(x1-x0)*iw, Y=v=>m.t+(1-(v-lo)/(hi-lo))*ih;
+  const svgNS='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(svgNS,'svg');
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`); svg.setAttribute('width','100%'); svg.setAttribute('height',H);
+  function add(tag,attrs,parent){const n=document.createElementNS(svgNS,tag);
+    for(const k in attrs)n.setAttribute(k,attrs[k]);(parent||svg).appendChild(n);return n;}
+  const css=getComputedStyle(document.documentElement);
+  const C={grid:css.getPropertyValue('--grid'),axis:css.getPropertyValue('--axis'),
+           muted:css.getPropertyValue('--muted'),series:css.getPropertyValue('--series'),
+           surface:css.getPropertyValue('--surface')};
+  // y grid: 4 hairlines + labels
+  for(let i=0;i<=3;i++){const v=lo+(hi-lo)*i/3, y=Y(v);
+    add('line',{x1:m.l,x2:W-m.r,y1:y,y2:y,stroke:C.grid,'stroke-width':1});
+    const t=add('text',{x:m.l-8,y:y+4,'text-anchor':'end',fill:C.muted,'font-size':11},svg);
+    t.textContent='$'+Math.round(v).toLocaleString();}
+  // baseline (inception equity), dashed
+  add('line',{x1:m.l,x2:W-m.r,y1:Y(baseline),y2:Y(baseline),stroke:C.axis,
+              'stroke-width':1,'stroke-dasharray':'4 4'});
+  // x labels: first & last
+  const dl=t=>new Date(t).toLocaleDateString(undefined,{month:'short',day:'numeric'});
+  [[x0,'start'],[x1,'end']].forEach(([t,a])=>{const e=add('text',
+    {x:X(t),y:H-8,'text-anchor':a,fill:C.muted,'font-size':11},svg);e.textContent=dl(t);});
+  // series
+  if(pts.length>1){
+    const d=pts.map((p,i)=>(i?'L':'M')+X(new Date(p.t).getTime()).toFixed(1)+' '+Y(p.e).toFixed(1)).join(' ');
+    add('path',{d,fill:'none',stroke:C.series,'stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'});
+  }
+  pts.forEach(p=>add('circle',{cx:X(new Date(p.t).getTime()),cy:Y(p.e),r:pts.length>28?2.5:4,
+    fill:C.series,stroke:C.surface,'stroke-width':2}));
+  // hover layer: crosshair + tooltip
+  const cross=add('line',{y1:m.t,y2:m.t+ih,stroke:C.axis,'stroke-width':1,visibility:'hidden'});
+  const tip=el.parentElement.querySelector('.tip');
+  svg.addEventListener('mousemove',ev=>{
+    const r=svg.getBoundingClientRect(), mx=(ev.clientX-r.left)*(W/r.width);
+    let best=0,bd=1e18;
+    pts.forEach((p,i)=>{const d=Math.abs(X(new Date(p.t).getTime())-mx);if(d<bd){bd=d;best=i;}});
+    const p=pts[best], px=X(new Date(p.t).getTime());
+    cross.setAttribute('x1',px);cross.setAttribute('x2',px);cross.setAttribute('visibility','visible');
+    tip.style.display='block';
+    tip.innerHTML=new Date(p.t).toLocaleString(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})
+      +'<br><b>'+fmt(p.e)+'</b> · '+p.o+' orders · '+(p.dry?'dry-run':'submitted');
+    const tw=tip.offsetWidth, lx=px/W*r.width;
+    tip.style.left=Math.min(Math.max(lx-tw/2,0),r.width-tw)+'px';
+    tip.style.top=(Y(p.e)/H*r.height-tip.offsetHeight-10)+'px';});
+  svg.addEventListener('mouseleave',()=>{cross.setAttribute('visibility','hidden');tip.style.display='none';});
+  el.appendChild(svg);
+}
+function renderAll(){
+  document.querySelectorAll('.chart').forEach(el=>{
+    el.innerHTML='';
+    drawChart(el, JSON.parse(el.dataset.pts), parseFloat(el.dataset.baseline));});
+}
+renderAll();
+// Re-render when a host page toggles its theme (data-theme on the root).
+new MutationObserver(renderAll).observe(document.documentElement,
+  {attributes:true, attributeFilter:['data-theme']});
+</script></body></html>
